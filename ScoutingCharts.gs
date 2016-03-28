@@ -234,39 +234,6 @@ function createCharts(d)
   }
 }
 
-function addCommentPosts()
-{
-  var sheet = getSheet();
-  //var s1 = sheet.getSheets()[0];
-  //var s1 = s1.activate();
-  var data = sheet.getDataRange().getValues();
-  var page = SitesApp.getPageByUrl("https://sites.google.com/site/paragonscouting/team-list/comments");
-  for(var i = 1; i < data.length; i++)
-  {
-    var title = data[i][1];
-    var html = data[i][15];
-    doLog("Title :: " + title + "    HTML :: " + html);
-    if(html == null)
-    {
-      html = "No comment";
-    }
-    if(page.getAttachments() != null)
-    {
-      doLog(page.getAnnouncements()[i-1].getName());
-      if(page.getAnnouncements()[i-1].getName() == title)
-      {
-        html = page.getAnnouncements()[i-1].getHtmlContent() + "<br>" + html; 
-      }
-      else {
-        var announcement = page.createAnnouncement(title, html, false);
-      }
-    }
-    else {
-      var announcement = page.createAnnouncement(title, html, false);
-    }
-  }
-}
-
 function delete230()
 {
   var page = SitesApp.getPageByUrl("https://sites.google.com/site/paragonscouting/home");
